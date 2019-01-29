@@ -1,5 +1,5 @@
   node{
-          
+    stages{       
  stage('SCM Checkout'){
      steps {
      git 'https://github.com/namjitharavind/jenkins-app.git'
@@ -50,6 +50,6 @@
       }
    }
   
-
+    }
 }
 
