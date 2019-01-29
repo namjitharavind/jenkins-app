@@ -25,9 +25,6 @@
           }
       }
    stage('Deploy to Tomcat'){
-      when {
-              branch "master"
-           }
             sshagent(['springboot']) {
               sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@dev-springboot.wisilica.com:/tmp/'
             }
