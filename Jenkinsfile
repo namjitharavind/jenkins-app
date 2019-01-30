@@ -1,12 +1,7 @@
   pipeline {
    agent any
-    environment {
-      qg = waitForQualityGate()
-   
-    }
-   tools {
-        maven 'maven-3' 
-    }
+  
+  
     stages{       
  stage('SCM Checkout'){
      steps {
@@ -15,15 +10,21 @@
    }
    stage('Compile-Package'){
       steps {
+        script{
       // Get maven home path
+           def mvnHome =  tool name: 'maven-3', type: 'maven' 
           sh "${mvnHome}/bin/mvn package"
+      }
       }
    }
    
    stage('SonarQube Analysis') {
       steps {
+        script{
+           def mvnHome =  tool name: 'maven-3', type: 'maven' 
           withSonarQubeEnv('sonar-6') { 
           sh "${mvnHome}/bin/mvn sonar:sonar"
+        }
         }
              
       }
@@ -32,6 +33,7 @@
     stage("Quality Gate Statuc Check"){
        steps {
          script {
+             def qg = waitForQualityGate()
           timeout(time: 1, unit: 'HOURS') {
               if (qg.status != 'OK') {
                   error "Pipeline aborted due to quality gate failure: ${qg.status}"
