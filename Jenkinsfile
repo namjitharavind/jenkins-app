@@ -16,7 +16,7 @@
       
          stage('SonarQube Analysis') {
               steps {
-                script{
+                script {
                     def mvnHome =  tool name: 'maven-3', type: 'maven' 
                      withSonarQubeEnv('sonar-6') { 
                       sh "${mvnHome}/bin/mvn sonar:sonar"
