@@ -23,7 +23,7 @@
                       }
                 }
               }
-          }
+          
       
          stage("Quality Gate Statuc Check"){
               steps {
