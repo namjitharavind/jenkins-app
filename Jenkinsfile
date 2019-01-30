@@ -23,7 +23,8 @@
                       }
                 }
               }
-          
+         }
+    }
       
          stage("Quality Gate Statuc Check"){
               steps {
@@ -47,12 +48,12 @@
                   }
               }
           }
-          stage('Email Notification'){
-              steps {
-                  mail bcc: '', body: '''Hi Welcome to jenkins email alerts
-                  Thanks
-                  Jenkins''', cc: '', from: 'devjenkins@wisilica.com', replyTo: '', subject: 'Jenkins Job', to: 'naravind@wisilica.com'
-              }
+           stage('Email Notification'){
+            steps {
+            mail bcc: '', body: '''Hi Welcome to jenkins email alerts
+            Thanks
+            Jenkins''', cc: '', from: 'devjenkins@wisilica.com', replyTo: '', subject: 'Jenkins Job', to: 'naravind@wisilica.com'
+            }
           }
       
       
