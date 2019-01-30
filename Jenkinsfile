@@ -1,6 +1,6 @@
   pipeline {
    agent any
-  
+ 
   
     stages{       
  stage('SCM Checkout'){
@@ -22,27 +22,19 @@
       steps {
         script{
            def mvnHome =  tool name: 'maven-3', type: 'maven' 
-          withSonarQubeEnv('sonar-6') { 
-          sh "${mvnHome}/bin/mvn sonar:sonar"
+           def scannerHome = tool 'SonarQubeScanner'
+         withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 1, unit: 'HOURS') {
+            waitForQualityGate abortPipeline: true
         }
         }
              
       }
     }
     
-    stage("Quality Gate Statuc Check"){
-       steps {
-         script {
-             def qg = waitForQualityGate()
-          timeout(time: 1, unit: 'HOURS') {
-              if (qg.status != 'OK') {
-                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
-              }
-          }
-         }
-       }
-      }
-   stage('Deploy to Tomcat'){
+    stage('Deploy to Tomcat'){
       when {
               branch "master"
            }
