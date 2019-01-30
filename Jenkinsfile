@@ -23,7 +23,7 @@
         script{
            def mvnHome =  tool name: 'maven-3', type: 'maven' 
            def scannerHome = tool 'SonarQubeScanner'
-         withSonarQubeEnv('sonarqube') {
+         withSonarQubeEnv('sonar-6') {
             sh "${scannerHome}/bin/sonar-scanner"
         }
         timeout(time: 1, unit: 'HOURS') {
