@@ -8,12 +8,17 @@
          }
         }
       
-       stage('SCM Checkout') {
-         steps {
-              git 'https://github.com/namjitharavind/jenkins-app.git'
-         }
+       stage('Compile-Package') {
+            steps {
+              script{
+                // Get maven home path
+                def mvnHome =  tool name: 'maven-3', type: 'maven' 
+               sh "${mvnHome}/bin/mvn package"
+              }
+            }
         }
-      
+   
+             
          stage('SonarQube Analysis') {
               steps {
                 script {
