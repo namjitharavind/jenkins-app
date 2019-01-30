@@ -1,14 +1,14 @@
   pipeline {
    agent any
-    stages{ 
+    stages { 
       
-       stage('SCM Checkout'){
+       stage('SCM Checkout') {
          steps {
             git 'https://github.com/namjitharavind/jenkins-app.git'
          }
         }
       
-       stage('SCM Checkout'){
+       stage('SCM Checkout') {
          steps {
               git 'https://github.com/namjitharavind/jenkins-app.git'
          }
@@ -26,7 +26,7 @@
          }
     
       
-         stage("Quality Gate Statuc Check"){
+         stage("Quality Gate Statuc Check") {
               steps {
                 script {
                   def qg = waitForQualityGate()
@@ -39,7 +39,7 @@
           }
          }
            
-          stage('Deploy to Tomcat'){
+          stage('Deploy to Tomcat') {
               when {
                 branch "master"
               }
@@ -49,7 +49,7 @@
                   }
               }
           }
-           stage('Email Notification'){
+           stage('Email Notification') {
             steps {
             mail bcc: '', body: '''Hi Welcome to jenkins email alerts
             Thanks
