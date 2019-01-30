@@ -25,16 +25,21 @@
           withSonarQubeEnv('sonar-6') { 
           sh "${mvnHome}/bin/mvn sonar:sonar"
         }
-        script {
+             
+      }
+    }
+    
+    stage("Quality Gate Statuc Check"){
+       steps {
+         script {
           timeout(time: 1, unit: 'HOURS') {
               if (qg.status != 'OK') {
                   error "Pipeline aborted due to quality gate failure: ${qg.status}"
               }
           }
+         }
+       }
       }
-    }
-   }
-    
    stage('Deploy to Tomcat'){
       when {
               branch "master"
