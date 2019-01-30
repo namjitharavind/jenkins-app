@@ -33,6 +33,7 @@
           }
       }
     }
+   }
     
    stage('Deploy to Tomcat'){
       when {
