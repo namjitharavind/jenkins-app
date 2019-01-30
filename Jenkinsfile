@@ -24,7 +24,7 @@
                 }
               }
          }
-    }
+    
       
          stage("Quality Gate Statuc Check"){
               steps {
@@ -37,6 +37,7 @@
                 }
               }
           }
+         }
            
           stage('Deploy to Tomcat'){
               when {
