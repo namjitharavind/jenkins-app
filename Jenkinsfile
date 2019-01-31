@@ -12,10 +12,11 @@
         }
       
        stage('Compile-Package') {
-            steps {
-              when {
+            when {
                 branch "master"
               }
+            steps {
+           
               script{
                 // Get maven home path
                 def mvnHome =  tool name: 'maven-3', type: 'maven' 
