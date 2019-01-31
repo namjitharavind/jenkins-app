@@ -3,13 +3,20 @@
     stages { 
       
        stage('SCM Checkout') {
+         when {
+                branch "master"
+              }
          steps {
             git 'https://github.com/namjitharavind/jenkins-app.git'
          }
         }
       
        stage('Compile-Package') {
+            when {
+                branch "master"
+              }
             steps {
+           
               script{
                 // Get maven home path
                 def mvnHome =  tool name: 'maven-3', type: 'maven' 
@@ -20,6 +27,9 @@
    
              
          stage('SonarQube Analysis') {
+           when {
+                branch "master"
+              }
               steps {
                 script {
                     def mvnHome =  tool name: 'maven-3', type: 'maven' 
@@ -32,6 +42,9 @@
     
       
          stage("Quality Gate Statuc Check") {
+           when {
+                branch "master"
+              }
               steps {
                 script {
                   def qg = waitForQualityGate()
@@ -55,6 +68,9 @@
               }
           }
            stage('Email Notification') {
+             when {
+                branch "master"
+              }
             steps {
             mail bcc: '', body: '''Hi Welcome to jenkins email alerts
             Thanks
