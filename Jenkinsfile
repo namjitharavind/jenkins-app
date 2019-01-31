@@ -3,18 +3,30 @@
     stages { 
       
        stage('SCM Checkout') {
-         when {
-                branch "master"
-              }
+         when{
+         expression {
+           // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
+           if(env.BRANCH_NAME == 'master' || env.CHANGE_ID){
+             return true;
+           }
+            return false;
+          }
+        }
          steps {
             git 'https://github.com/namjitharavind/jenkins-app.git'
          }
         }
       
        stage('Compile-Package') {
-            when {
-                branch "master"
-              }
+            when{
+         expression {
+           // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
+           if(env.BRANCH_NAME == 'master' || env.CHANGE_ID){
+             return true;
+           }
+            return false;
+          }
+        }
             steps {
            
               script{
@@ -27,9 +39,15 @@
    
              
          stage('SonarQube Analysis') {
-           when {
-                branch "master"
-              }
+         when{
+         expression {
+           // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
+           if(env.BRANCH_NAME == 'master' || env.CHANGE_ID){
+             return true;
+           }
+            return false;
+          }
+        }
               steps {
                 script {
                     def mvnHome =  tool name: 'maven-3', type: 'maven' 
@@ -42,9 +60,15 @@
     
       
          stage("Quality Gate Statuc Check") {
-           when {
-                branch "master"
-              }
+         when{
+         expression {
+           // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
+           if(env.BRANCH_NAME == 'master' || env.CHANGE_ID){
+             return true;
+           }
+            return false;
+          }
+        }
               steps {
                 script {
                   def qg = waitForQualityGate()
@@ -58,9 +82,15 @@
          }
            
           stage('Deploy to Tomcat') {
-              when {
-                branch "master"
-              }
+             when{
+         expression {
+           // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
+           if(env.BRANCH_NAME == 'master' || env.CHANGE_ID){
+             return true;
+           }
+            return false;
+          }
+        }
               steps {
                   sshagent(['springboot']) {
                   sh 'scp -o StrictHostKeyChecking=no target/*.war ubuntu@dev-springboot.wisilica.com:/tmp/'
@@ -68,9 +98,15 @@
               }
           }
            stage('Email Notification') {
-             when {
-                branch "master"
-              }
+         when{
+         expression {
+           // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
+           if(env.BRANCH_NAME == 'master' || env.CHANGE_ID){
+             return true;
+           }
+            return false;
+          }
+        }
             steps {
             mail bcc: '', body: '''Hi Welcome to jenkins email alerts
             Thanks
