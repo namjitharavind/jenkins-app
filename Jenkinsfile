@@ -104,19 +104,19 @@
      post {
         success {
           script{
-         when{
-         expression {
+         
            // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
            if(env.BRANCH_NAME == 'master' || env.CHANGE_ID){
-             return true;
-           }
-            return false;
-          }
-        }
-            
-            mail bcc: '', body: '''Hi Welcome to jenkins email alerts
+             
+              mail bcc: '', body: '''Hi Welcome to jenkins email alerts
             Thanks
             Jenkins''', cc: '', from: 'devjenkins@wisilica.com', replyTo: '', subject: 'Jenkins Job', to: 'naravind@wisilica.com'
+            
+           }
+           
+         
+            
+           
             
            
           }
