@@ -102,7 +102,7 @@
     }
     //email
      post {
-        success {
+        failure {
           script{
          
            // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
