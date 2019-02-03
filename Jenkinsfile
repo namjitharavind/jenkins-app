@@ -85,7 +85,7 @@
              when{
          expression {
            // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
-           if(env.BRANCH_NAME == 'master' || env.CHANGE_ID){
+           if(env.BRANCH_NAME == 'master'){
              return true;
            }
             return false;
