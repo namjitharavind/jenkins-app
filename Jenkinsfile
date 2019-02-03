@@ -113,11 +113,11 @@
             return false;
           }
         }
-            steps {
+            
             mail bcc: '', body: '''Hi Welcome to jenkins email alerts
             Thanks
             Jenkins''', cc: '', from: 'devjenkins@wisilica.com', replyTo: '', subject: 'Jenkins Job', to: 'naravind@wisilica.com'
-            }
+            
            }
           
       }
