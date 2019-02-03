@@ -97,6 +97,8 @@
                   }
               }
           }
+      post {
+        failure {
            stage('Email Notification') {
          when{
          expression {
@@ -112,8 +114,9 @@
             Thanks
             Jenkins''', cc: '', from: 'devjenkins@wisilica.com', replyTo: '', subject: 'Jenkins Job', to: 'naravind@wisilica.com'
             }
+           }
           }
-      
+      }
       
     }
   }
