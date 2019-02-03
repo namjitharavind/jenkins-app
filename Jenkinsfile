@@ -97,7 +97,11 @@
                   }
               }
           }
-      post {
+     
+      
+    }
+    //email
+     post {
         failure {
            
          when{
@@ -117,7 +121,5 @@
            }
           
       }
-      
-    }
   }
  
