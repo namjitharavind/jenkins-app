@@ -99,7 +99,7 @@
           }
       post {
         failure {
-           stage('Email Notification') {
+           
          when{
          expression {
            // CHANGE_ID is set only for pull requests, so it is safe to access the pullRequest global variable
@@ -115,7 +115,7 @@
             Jenkins''', cc: '', from: 'devjenkins@wisilica.com', replyTo: '', subject: 'Jenkins Job', to: 'naravind@wisilica.com'
             }
            }
-          }
+          
       }
       
     }
